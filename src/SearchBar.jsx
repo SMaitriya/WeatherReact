@@ -1,7 +1,7 @@
 
 import { useState } from "react";
 
-export function SearchBar({cityValue, cityOnChange}) {
+export function SearchBar({cityValue, cityOnChange, handleSearch}) {
     
 
     return (
@@ -9,8 +9,9 @@ export function SearchBar({cityValue, cityOnChange}) {
         <p>Select the city</p>
         <input type="text"
         value={cityValue}
-        onChange={e => cityOnChange(e.target.value)}
+        onChange={e => {cityOnChange(e.target.value)}}
         ></input>
+        <button onClick={handleSearch}> Search</button>
         </>
     )
 

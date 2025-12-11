@@ -3,6 +3,7 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 import { SearchBar } from './SearchBar.jsx';
+import { Result } from './Result.jsx';
 
 function App() {
   
@@ -16,7 +17,7 @@ function App() {
     }
     const URL_FINALE = `https://api.openweathermap.org/data/2.5/weather?q=${cityInput}&appid=${API_KEY}&units=metric`;
     try {
-      const response = await fetch(URL_FINAL);
+      const response = await fetch(URL_FINALE);
       if (!response.ok) {
             throw new Error(`Erreur HTTP: ${response.status} - Ville non trouvée.`);
         }
@@ -38,7 +39,14 @@ function App() {
      <p></p>
      <SearchBar
      cityValue={cityInput}
-     onCityChange={setCity}/>
+     cityOnChange={setCity}
+     handleSearch={handleSearch}/>
+     {weatherData ? (
+      <Result data={weatherData}/>
+     ) : (
+      <p>Search weather with city name</p>
+     )
+     }
     </>
   )
 }
