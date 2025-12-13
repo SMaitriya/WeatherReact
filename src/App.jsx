@@ -1,6 +1,4 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
 import { SearchBar } from './SearchBar.jsx';
 import { Result } from './Result.jsx';
@@ -10,13 +8,18 @@ function App() {
   const [cityInput, setCity] = useState("");
   const API_KEY = import.meta.env.VITE_OPENWEATHER_API_KEY;
   const [weatherData, setWeatherData] = useState(null)
+  const [isLoading, setIsLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState(null);
 
   const handleSearch = async () => {
     if(!cityInput) {
       return
     }
+    setWeatherData(null);
+    setErrorMessage(null);
     const URL_FINALE = `https://api.openweathermap.org/data/2.5/weather?q=${cityInput}&appid=${API_KEY}&units=metric`;
     try {
+      setIsLoading(true);
       const response = await fetch(URL_FINALE);
       if (!response.ok) {
             throw new Error(`Erreur HTTP: ${response.status} - Ville non trouvée.`);
@@ -28,7 +31,11 @@ function App() {
     }
     catch (error) {
       setWeatherData(null);
+      setErrorMessage("Couldnt find city name");
       console.error("Erreur de récupération des données :", error.message);
+    }
+    finally {
+      setIsLoading(false);
     }
 
   }
@@ -36,16 +43,22 @@ function App() {
 
   return (
     <>
-     <p></p>
      <SearchBar
      cityValue={cityInput}
      cityOnChange={setCity}
-     handleSearch={handleSearch}/>
-     {weatherData ? (
-      <Result data={weatherData}/>
-     ) : (
-      <p>Search weather with city name</p>
+     handleSearch={handleSearch}
+     isLoading={isLoading}/>
+     {isLoading ? (
+      <p>Loading...</p>
+     ) : errorMessage ? (
+      <p style={{ color: 'red' }}>{errorMessage}</p>
      )
+    
+     : weatherData ? (
+       <Result data={weatherData}/>
+     ) : (
+     <p>Seach weather with city name </p>
+      )
      }
     </>
   )
