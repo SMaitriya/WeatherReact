@@ -11,7 +11,7 @@ export function SearchBar({cityValue, cityOnChange, handleSearch, isLoading}) {
         value={cityValue} 
         onChange={e => {cityOnChange(e.target.value)}}
         ></input>
-        <button onClick={handleSearch} disabled={isLoading}>{isLoading ? 'Loading...' : 'Search'}</button>
+        <button onClick={() => handleSearch(cityValue)} disabled={isLoading}>{isLoading ? 'Loading...' : 'Search'}</button>
         
         </>
     )

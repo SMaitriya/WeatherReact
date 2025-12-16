@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import './App.css'
 import { SearchBar } from './SearchBar.jsx';
 import { Result } from './Result.jsx';
@@ -11,13 +11,25 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState(null);
 
-  const handleSearch = async () => {
-    if(!cityInput) {
+
+  useEffect(() => {
+    const defaultCity = "Paris";
+    setCity(defaultCity);
+    handleSearch(defaultCity);
+
+  }, []);
+
+
+
+  const handleSearch = async (cityToSearch) => {
+
+    const searchCity = cityToSearch || cityInput;
+    if(!searchCity) {
       return
     }
     setWeatherData(null);
     setErrorMessage(null);
-    const URL_FINALE = `https://api.openweathermap.org/data/2.5/weather?q=${cityInput}&appid=${API_KEY}&units=metric`;
+    const URL_FINALE = `https://api.openweathermap.org/data/2.5/weather?q=${searchCity}&appid=${API_KEY}&units=metric`;
     try {
       setIsLoading(true);
       const response = await fetch(URL_FINALE);
