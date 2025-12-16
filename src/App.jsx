@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import './App.css'
 import { SearchBar } from './SearchBar.jsx';
 import { Result } from './Result.jsx';
@@ -10,12 +10,17 @@ function App() {
   const [weatherData, setWeatherData] = useState(null)
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState(null);
+  const inputRef = useRef(null);
 
 
   useEffect(() => {
     const defaultCity = "Paris";
     setCity(defaultCity);
     handleSearch(defaultCity);
+
+    if(inputRef.current) {
+      inputRef.current.focus();
+    }
 
   }, []);
 
@@ -59,7 +64,8 @@ function App() {
      cityValue={cityInput}
      cityOnChange={setCity}
      handleSearch={handleSearch}
-     isLoading={isLoading}/>
+     isLoading={isLoading}
+     inputRef={inputRef}/>
      {isLoading ? (
       <p>Loading...</p>
      ) : errorMessage ? (
