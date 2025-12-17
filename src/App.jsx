@@ -67,19 +67,16 @@ function App() {
      isLoading={isLoading}
      inputRef={inputRef}/>
      {isLoading ? (
-      <p>Loading...</p>
-     ) : errorMessage ? (
-      <p style={{ color: 'red' }}>{errorMessage}</p>
-     )
-    
-     : weatherData ? (
-       <Result data={weatherData}/>
-     ) : (
-     <p>Seach weather with city name </p>
-      )
-     }
-    </>
-  )
-}
+      <p className="loading">Loading...</p>
+      ) : errorMessage ? (
+        <p className="error">{errorMessage}</p>
+      ) : weatherData ? (
+        <Result data={weatherData}/>
+      ) : (
+        <p className="empty">Search weather with city name</p>
+      )}
+          </>
+        )
+      }
 
 export default App
