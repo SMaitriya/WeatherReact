@@ -1,16 +1,48 @@
-# React + Vite
+# 🌤️ Weather App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern weather application with real-time data integration using the OpenWeatherMap API.
 
-Currently, two official plugins are available:
+![Weather App Screenshot](public/image.png)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🎯 Features
 
-## React Compiler
+- Real-time weather data via OpenWeatherMap API
+- City-based weather search with instant results
+- Displays temperature, humidity, and temperature range
+- Dynamic weather icons based on conditions
+- Responsive error handling for invalid inputs
+- Keyboard shortcuts (Enter to search)
+- Modern dark UI design
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 🛠️ Built With
 
-## Expanding the ESLint configuration
+- **React** - Component-based architecture
+- **Vite** - Fast build tooling
+- **OpenWeatherMap API** - RESTful weather data service
+- **JavaScript ES6+** - Async/await, fetch API
+- **CSS3** - Modern styling with backdrop filters
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 🚀 Key Implementation
+
+- Integrated RESTful API with proper error handling
+- Managed application state with React hooks
+- Implemented async data fetching with loading states
+- Built reusable component architecture
+- Handled API keys securely with environment variables
+
+## 📦 Installation
+```bash
+git clone https://github.com/yourusername/weather-app.git
+cd weather-app
+npm install
+```
+
+Add your API key in `.env`:
+```
+VITE_OPENWEATHER_API_KEY=your_api_key_here
+```
+
+Run the app:
+```bash
+npm run dev
+```
